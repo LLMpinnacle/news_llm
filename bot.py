@@ -1,15 +1,10 @@
 
-import requests
-import time
-import json
 from news_file import get_news_from_keyword
-import sys
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from keys import telegram_key,news_api_key
 import logging
 
-import asyncio
 import ollama
 
 
@@ -27,7 +22,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         response = "Hello! How can I help you?"
     else:
         data=get_news_from_keyword(user_message.lower())   
-        print("data",data)  
         llama_output = ollama.chat(model='llama3.2:latest',messages=[{'role': 'user', 'content': 'mention your opinion only give me positives {}'.format(data)}])
        
         await update.message.reply_text(f"Here is the LLaMA 3.2 output: {llama_output['message']['content']}")

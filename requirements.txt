@@ -1,0 +1,4 @@
+newsapi_python==0.2.7
+ollama==0.4.7
+python-telegram-bot==21.10
+Requests==2.32.3
